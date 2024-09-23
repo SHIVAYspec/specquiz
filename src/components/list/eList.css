@@ -1,0 +1,41 @@
+.eList {
+    padding: 3px;
+    border: 1px solid black;
+    background-color: #D2B4DE;
+    height: calc(100% - 8px);
+    width: 35%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: baseline;
+    justify-content: center;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.bullet {
+    margin: 3px;
+    border: 1px solid black;
+    box-shadow: 3px 3px;
+    border-radius : 3px;
+    border-shadow : 3px;
+    padding: 5px;
+    display: inline-flex;
+    animation: fadein 2s;
+}
+
+.country-bullet {
+    background-color: #F8C471;
+}
+
+.capital-bullet {
+    background-color: #BFC9CA;
+}
+
+p {
+    margin: 0;
+}

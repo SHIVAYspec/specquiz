@@ -1,0 +1,37 @@
+.eInput {
+    border: 1px solid black;
+    width: calc(100% - 2px);
+    height: 46px;
+    display: flex;
+    flex-direction: row;
+}
+
+.answerbox {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+    background: #E6E6FA;
+}
+
+.databox {
+    border-left: 1px solid black;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: xx-large;
+}
+
+.timer {
+    background: #FFA500;
+}
+
+.giveup {
+    background: #FF4500;
+}
+
+.score {
+    background: #4682B4;
+    width: 100%;
+}

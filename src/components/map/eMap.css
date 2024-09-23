@@ -1,0 +1,10 @@
+.eMap {
+    border: 1px solid black;
+    background-color: #AED6F1;
+    height: calc(100% - 2px);
+    width: 65%;
+}
+
+.leaflet-container {
+    height: 100%;
+}

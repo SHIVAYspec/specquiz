@@ -1,0 +1,1051 @@
+{
+  "BD": {
+    "note": "Bangladesh | Dhaka",
+    "quiz": true
+  },
+  "BE": {
+    "note": "Belgium | Brussels",
+    "quiz": true
+  },
+  "BF": {
+    "note": "Burkina Faso | Ouagadougou",
+    "quiz": true
+  },
+  "BG": {
+    "note": "Bulgaria | Sofia",
+    "quiz": true
+  },
+  "BA": {
+    "note": "Bosnia and Herzegovina | Sarajevo",
+    "quiz": true
+  },
+  "BB": {
+    "note": "Barbados | Bridgetown",
+    "quiz": true
+  },
+  "WF": {
+    "note": "Wallis and Futuna | Mata Utu",
+    "quiz": false
+  },
+  "BL": {
+    "note": "Saint Barthelemy | Gustavia",
+    "quiz": false
+  },
+  "BM": {
+    "note": "Bermuda | Hamilton",
+    "quiz": false
+  },
+  "BN": {
+    "note": "Brunei | Bandar Seri Begawan",
+    "quiz": true
+  },
+  "BO": {
+    "note": "Bolivia | Sucre",
+    "altCapitals": [
+      "La Paz"
+    ],
+    "quiz": true
+  },
+  "BH": {
+    "note": "Bahrain | Manama",
+    "quiz": true
+  },
+  "BI": {
+    "note": "Burundi | Bujumbura",
+    "altCapital": [
+      "Gitega"
+    ],
+    "quiz": true
+  },
+  "BJ": {
+    "note": "Benin | Porto-Novo",
+    "quiz": true
+  },
+  "BT": {
+    "note": "Bhutan | Thimphu",
+    "quiz": true
+  },
+  "JM": {
+    "note": "Jamaica | Kingston",
+    "quiz": true
+  },
+  "BV": {
+    "note": "Bouvet Island | ",
+    "quiz": false
+  },
+  "BW": {
+    "note": "Botswana | Gaborone",
+    "quiz": true
+  },
+  "WS": {
+    "note": "Samoa | Apia",
+    "quiz": true
+  },
+  "BQ": {
+    "note": "Bonaire, Saint Eustatius and Saba  | ",
+    "quiz": false
+  },
+  "BR": {
+    "note": "Brazil | Brasilia",
+    "quiz": true
+  },
+  "BS": {
+    "note": "Bahamas | Nassau",
+    "quiz": true
+  },
+  "JE": {
+    "note": "Jersey | Saint Helier",
+    "quiz": false
+  },
+  "BY": {
+    "note": "Belarus | Minsk",
+    "quiz": true
+  },
+  "BZ": {
+    "note": "Belize | Belmopan",
+    "quiz": true
+  },
+  "RU": {
+    "note": "Russia | Moscow",
+    "quiz": true
+  },
+  "RW": {
+    "note": "Rwanda | Kigali",
+    "quiz": true
+  },
+  "RS": {
+    "note": "Serbia | Belgrade",
+    "quiz": true
+  },
+  "TL": {
+    "note": "East Timor | Dili",
+    "altNames": [
+      "Timor-Leste"
+    ],
+    "quiz": true
+  },
+  "RE": {
+    "note": "Reunion | Saint-Denis",
+    "quiz": false
+  },
+  "TM": {
+    "note": "Turkmenistan | Ashgabat",
+    "quiz": true
+  },
+  "TJ": {
+    "note": "Tajikistan | Dushanbe",
+    "quiz": true
+  },
+  "RO": {
+    "note": "Romania | Bucharest",
+    "quiz": true
+  },
+  "TK": {
+    "note": "Tokelau | ",
+    "quiz": false
+  },
+  "GW": {
+    "note": "Guinea-Bissau | Bissau",
+    "quiz": true
+  },
+  "GU": {
+    "note": "Guam | Hagatna",
+    "quiz": false
+  },
+  "GT": {
+    "note": "Guatemala | Guatemala City",
+    "quiz": true
+  },
+  "GS": {
+    "note": "South Georgia and the South Sandwich Islands | Grytviken",
+    "quiz": false
+  },
+  "GR": {
+    "note": "Greece | Athens",
+    "quiz": true
+  },
+  "GQ": {
+    "note": "Equatorial Guinea | Malabo",
+    "quiz": true
+  },
+  "GP": {
+    "note": "Guadeloupe | Basse-Terre",
+    "quiz": false
+  },
+  "JP": {
+    "note": "Japan | Tokyo",
+    "quiz": true
+  },
+  "GY": {
+    "note": "Guyana | Georgetown",
+    "quiz": true
+  },
+  "GG": {
+    "note": "Guernsey | St Peter Port",
+    "quiz": false
+  },
+  "GF": {
+    "note": "French Guiana | Cayenne",
+    "quiz": false
+  },
+  "GE": {
+    "note": "Georgia | Tbilisi",
+    "quiz": true
+  },
+  "GD": {
+    "note": "Grenada | St. George's",
+    "quiz": true
+  },
+  "GB": {
+    "note": "United Kingdom | London",
+    "quiz": true
+  },
+  "GA": {
+    "note": "Gabon | Libreville",
+    "quiz": true
+  },
+  "SV": {
+    "note": "El Salvador | San Salvador",
+    "quiz": true
+  },
+  "GN": {
+    "note": "Guinea | Conakry",
+    "quiz": true
+  },
+  "GM": {
+    "note": "Gambia | Banjul",
+    "quiz": true
+  },
+  "GL": {
+    "note": "Greenland | Nuuk",
+    "quiz": false
+  },
+  "GI": {
+    "note": "Gibraltar | Gibraltar",
+    "quiz": false
+  },
+  "GH": {
+    "note": "Ghana | Accra",
+    "quiz": true
+  },
+  "OM": {
+    "note": "Oman | Muscat",
+    "quiz": true
+  },
+  "TN": {
+    "note": "Tunisia | Tunis",
+    "quiz": true
+  },
+  "JO": {
+    "note": "Jordan | Amman",
+    "quiz": true
+  },
+  "HR": {
+    "note": "Croatia | Zagreb",
+    "quiz": true
+  },
+  "HT": {
+    "note": "Haiti | Port-au-Prince",
+    "quiz": true
+  },
+  "HU": {
+    "note": "Hungary | Budapest",
+    "quiz": true
+  },
+  "HK": {
+    "note": "Hong Kong | Hong Kong",
+    "quiz": false
+  },
+  "HN": {
+    "note": "Honduras | Tegucigalpa",
+    "quiz": true
+  },
+  "HM": {
+    "note": "Heard Island and McDonald Islands | ",
+    "quiz": false
+  },
+  "VE": {
+    "note": "Venezuela | Caracas",
+    "quiz": true
+  },
+  "PR": {
+    "note": "Puerto Rico | San Juan",
+    "quiz": false
+  },
+  "PS": {
+    "note": "Palestinian Territory | East Jerusalem",
+    "altCapitals": [
+      "Ramallah"
+    ],
+    "quiz": true
+  },
+  "PW": {
+    "note": "Palau | Melekeok",
+    "altCapitals": [
+      "Ngerulmud"
+    ],
+    "quiz": true
+  },
+  "PT": {
+    "note": "Portugal | Lisbon",
+    "quiz": true
+  },
+  "SJ": {
+    "note": "Svalbard and Jan Mayen | Longyearbyen",
+    "quiz": false
+  },
+  "PY": {
+    "note": "Paraguay | Asuncion",
+    "quiz": true
+  },
+  "IQ": {
+    "note": "Iraq | Baghdad",
+    "quiz": true
+  },
+  "PA": {
+    "note": "Panama | Panama City",
+    "quiz": true
+  },
+  "PF": {
+    "note": "French Polynesia | Papeete",
+    "quiz": false
+  },
+  "PG": {
+    "note": "Papua New Guinea | Port Moresby",
+    "quiz": true
+  },
+  "PE": {
+    "note": "Peru | Lima",
+    "quiz": true
+  },
+  "PK": {
+    "note": "Pakistan | Islamabad",
+    "quiz": true
+  },
+  "PH": {
+    "note": "Philippines | Manila",
+    "quiz": true
+  },
+  "PN": {
+    "note": "Pitcairn | Adamstown",
+    "quiz": false
+  },
+  "PL": {
+    "note": "Poland | Warsaw",
+    "quiz": true
+  },
+  "PM": {
+    "note": "Saint Pierre and Miquelon | Saint-Pierre",
+    "quiz": false
+  },
+  "ZM": {
+    "note": "Zambia | Lusaka",
+    "quiz": true
+  },
+  "EH": {
+    "note": "Western Sahara | El-Aaiun",
+    "quiz": false
+  },
+  "EE": {
+    "note": "Estonia | Tallinn",
+    "quiz": true
+  },
+  "EG": {
+    "note": "Egypt | Cairo",
+    "quiz": true
+  },
+  "ZA": {
+    "note": "South Africa | Pretoria",
+    "altCapitals": [
+      "Cape Town",
+      "Bloemfontein"
+    ],
+    "quiz": true
+  },
+  "EC": {
+    "note": "Ecuador | Quito",
+    "quiz": true
+  },
+  "IT": {
+    "note": "Italy | Rome",
+    "quiz": true
+  },
+  "VN": {
+    "note": "Vietnam | Hanoi",
+    "quiz": true
+  },
+  "SB": {
+    "note": "Solomon Islands | Honiara",
+    "quiz": true
+  },
+  "ET": {
+    "note": "Ethiopia | Addis Ababa",
+    "quiz": true
+  },
+  "SO": {
+    "note": "Somalia | Mogadishu",
+    "quiz": true
+  },
+  "ZW": {
+    "note": "Zimbabwe | Harare",
+    "quiz": true
+  },
+  "SA": {
+    "note": "Saudi Arabia | Riyadh",
+    "quiz": true
+  },
+  "ES": {
+    "note": "Spain | Madrid",
+    "quiz": true
+  },
+  "ER": {
+    "note": "Eritrea | Asmara",
+    "quiz": true
+  },
+  "ME": {
+    "note": "Montenegro | Podgorica",
+    "quiz": true
+  },
+  "MD": {
+    "note": "Moldova | Chisinau",
+    "quiz": true
+  },
+  "MG": {
+    "note": "Madagascar | Antananarivo",
+    "quiz": true
+  },
+  "MF": {
+    "note": "Saint Martin | Marigot",
+    "quiz": false
+  },
+  "MA": {
+    "note": "Morocco | Rabat",
+    "quiz": true
+  },
+  "MC": {
+    "note": "Monaco | Monaco",
+    "quiz": true
+  },
+  "UZ": {
+    "note": "Uzbekistan | Tashkent",
+    "quiz": true
+  },
+  "MM": {
+    "note": "Myanmar | Nay Pyi Taw",
+    "altCapitals": [
+      "Naypyidaw"
+    ],
+    "quiz": true
+  },
+  "ML": {
+    "note": "Mali | Bamako",
+    "quiz": true
+  },
+  "MO": {
+    "note": "Macao | Macao",
+    "quiz": false
+  },
+  "MN": {
+    "note": "Mongolia | Ulan Bator",
+    "altCapitals": [
+      "Ulaanbaatar"
+    ],
+    "quiz": true
+  },
+  "MH": {
+    "note": "Marshall Islands | Majuro",
+    "quiz": true
+  },
+  "MK": {
+    "note": "Macedonia | Skopje",
+    "altNames": [
+      "North Macedonia"
+    ],
+    "quiz": true
+  },
+  "MU": {
+    "note": "Mauritius | Port Louis",
+    "quiz": true
+  },
+  "MT": {
+    "note": "Malta | Valletta",
+    "quiz": true
+  },
+  "MW": {
+    "note": "Malawi | Lilongwe",
+    "quiz": true
+  },
+  "MV": {
+    "note": "Maldives | Male",
+    "quiz": true
+  },
+  "MQ": {
+    "note": "Martinique | Fort-de-France",
+    "quiz": false
+  },
+  "MP": {
+    "note": "Northern Mariana Islands | Saipan",
+    "quiz": false
+  },
+  "MS": {
+    "note": "Montserrat | Plymouth",
+    "quiz": false
+  },
+  "MR": {
+    "note": "Mauritania | Nouakchott",
+    "quiz": true
+  },
+  "IM": {
+    "note": "Isle of Man | Douglas, Isle of Man",
+    "quiz": false
+  },
+  "UG": {
+    "note": "Uganda | Kampala",
+    "quiz": true
+  },
+  "TZ": {
+    "note": "Tanzania | Dodoma",
+    "quiz": true
+  },
+  "MY": {
+    "note": "Malaysia | Kuala Lumpur",
+    "quiz": true
+  },
+  "MX": {
+    "note": "Mexico | Mexico City",
+    "quiz": true
+  },
+  "IL": {
+    "note": "Israel | Jerusalem",
+    "quiz": true
+  },
+  "FR": {
+    "note": "France | Paris",
+    "quiz": true
+  },
+  "IO": {
+    "note": "British Indian Ocean Territory | Diego Garcia",
+    "quiz": false
+  },
+  "SH": {
+    "note": "Saint Helena | Jamestown",
+    "quiz": false
+  },
+  "FI": {
+    "note": "Finland | Helsinki",
+    "quiz": true
+  },
+  "FJ": {
+    "note": "Fiji | Suva",
+    "quiz": true
+  },
+  "FK": {
+    "note": "Falkland Islands | Stanley",
+    "quiz": false
+  },
+  "FM": {
+    "note": "Micronesia | Palikir",
+    "quiz": true
+  },
+  "FO": {
+    "note": "Faroe Islands | Torshavn",
+    "quiz": false
+  },
+  "NI": {
+    "note": "Nicaragua | Managua",
+    "quiz": true
+  },
+  "NL": {
+    "note": "Netherlands | Amsterdam",
+    "quiz": true
+  },
+  "NO": {
+    "note": "Norway | Oslo",
+    "quiz": true
+  },
+  "NA": {
+    "note": "Namibia | Windhoek",
+    "quiz": true
+  },
+  "VU": {
+    "note": "Vanuatu | Port Vila",
+    "quiz": true
+  },
+  "NC": {
+    "note": "New Caledonia | Noumea",
+    "quiz": false
+  },
+  "NE": {
+    "note": "Niger | Niamey",
+    "quiz": true
+  },
+  "NF": {
+    "note": "Norfolk Island | Kingston",
+    "quiz": false
+  },
+  "NG": {
+    "note": "Nigeria | Abuja",
+    "quiz": true
+  },
+  "NZ": {
+    "note": "New Zealand | Wellington",
+    "quiz": true
+  },
+  "NP": {
+    "note": "Nepal | Kathmandu",
+    "quiz": true
+  },
+  "NR": {
+    "note": "Nauru | Yaren",
+    "quiz": true
+  },
+  "NU": {
+    "note": "Niue | Alofi",
+    "quiz": false
+  },
+  "CK": {
+    "note": "Cook Islands | Avarua",
+    "quiz": false
+  },
+  "XK": {
+    "note": "Kosovo | Pristina",
+    "quiz": true
+  },
+  "CI": {
+    "note": "Ivory Coast | Yamoussoukro",
+    "quiz": true
+  },
+  "CH": {
+    "note": "Switzerland | Berne",
+    "altCapitals": [
+      "Bern"
+    ],
+    "quiz": true
+  },
+  "CO": {
+    "note": "Colombia | Bogota",
+    "quiz": true
+  },
+  "CN": {
+    "note": "China | Beijing",
+    "quiz": true
+  },
+  "CM": {
+    "note": "Cameroon | Yaounde",
+    "quiz": true
+  },
+  "CL": {
+    "note": "Chile | Santiago",
+    "quiz": true
+  },
+  "CC": {
+    "note": "Cocos Islands | West Island",
+    "quiz": false
+  },
+  "CA": {
+    "note": "Canada | Ottawa",
+    "quiz": true
+  },
+  "CG": {
+    "note": "Republic of the Congo | Brazzaville",
+    "quiz": true
+  },
+  "CF": {
+    "note": "Central African Republic | Bangui",
+    "quiz": true
+  },
+  "CD": {
+    "note": "Democratic Republic of the Congo | Kinshasa",
+    "quiz": true
+  },
+  "CZ": {
+    "note": "Czech Republic | Prague",
+    "quiz": true
+  },
+  "CY": {
+    "note": "Cyprus | Nicosia",
+    "quiz": true
+  },
+  "CX": {
+    "note": "Christmas Island | Flying Fish Cove",
+    "quiz": false
+  },
+  "CR": {
+    "note": "Costa Rica | San Jose",
+    "quiz": true
+  },
+  "CW": {
+    "note": "Curacao |  Willemstad",
+    "quiz": false
+  },
+  "CV": {
+    "note": "Cape Verde | Praia",
+    "altNames": [
+      "Cabo Verde"
+    ],
+    "quiz": true
+  },
+  "CU": {
+    "note": "Cuba | Havana",
+    "quiz": true
+  },
+  "SZ": {
+    "note": "Swaziland | Mbabane",
+    "altNames": [
+      "Eswatini"
+    ],
+    "quiz": true
+  },
+  "SY": {
+    "note": "Syria | Damascus",
+    "quiz": true
+  },
+  "SX": {
+    "note": "Sint Maarten | Philipsburg",
+    "quiz": false
+  },
+  "KG": {
+    "note": "Kyrgyzstan | Bishkek",
+    "quiz": true
+  },
+  "KE": {
+    "note": "Kenya | Nairobi",
+    "quiz": true
+  },
+  "SS": {
+    "note": "South Sudan | Juba",
+    "quiz": true
+  },
+  "SR": {
+    "note": "Suriname | Paramaribo",
+    "quiz": true
+  },
+  "KI": {
+    "note": "Kiribati | Tarawa",
+    "quiz": true
+  },
+  "KH": {
+    "note": "Cambodia | Phnom Penh",
+    "quiz": true
+  },
+  "KN": {
+    "note": "Saint Kitts and Nevis | Basseterre",
+    "quiz": true
+  },
+  "KM": {
+    "note": "Comoros | Moroni",
+    "quiz": true
+  },
+  "ST": {
+    "note": "Sao Tome and Principe | Sao Tome",
+    "quiz": true
+  },
+  "SK": {
+    "note": "Slovakia | Bratislava",
+    "quiz": true
+  },
+  "KR": {
+    "note": "South Korea | Seoul",
+    "quiz": true
+  },
+  "SI": {
+    "note": "Slovenia | Ljubljana",
+    "quiz": true
+  },
+  "KP": {
+    "note": "North Korea | Pyongyang",
+    "quiz": true
+  },
+  "KW": {
+    "note": "Kuwait | Kuwait City",
+    "quiz": true
+  },
+  "SN": {
+    "note": "Senegal | Dakar",
+    "quiz": true
+  },
+  "SM": {
+    "note": "San Marino | San Marino",
+    "quiz": true
+  },
+  "SL": {
+    "note": "Sierra Leone | Freetown",
+    "quiz": true
+  },
+  "SC": {
+    "note": "Seychelles | Victoria",
+    "quiz": true
+  },
+  "KZ": {
+    "note": "Kazakhstan | Astana",
+    "quiz": true
+  },
+  "KY": {
+    "note": "Cayman Islands | George Town",
+    "quiz": false
+  },
+  "SG": {
+    "note": "Singapore | Singapur",
+    "altCapitals": [
+      "Singapore"
+    ],
+    "quiz": true
+  },
+  "SE": {
+    "note": "Sweden | Stockholm",
+    "quiz": true
+  },
+  "SD": {
+    "note": "Sudan | Khartoum",
+    "quiz": true
+  },
+  "DO": {
+    "note": "Dominican Republic | Santo Domingo",
+    "quiz": true
+  },
+  "DM": {
+    "note": "Dominica | Roseau",
+    "quiz": true
+  },
+  "DJ": {
+    "note": "Djibouti | Djibouti",
+    "quiz": true
+  },
+  "DK": {
+    "note": "Denmark | Copenhagen",
+    "quiz": true
+  },
+  "VG": {
+    "note": "British Virgin Islands | Road Town",
+    "quiz": false
+  },
+  "DE": {
+    "note": "Germany | Berlin",
+    "quiz": true
+  },
+  "YE": {
+    "note": "Yemen | Sanaa",
+    "altCapitals": [
+      "Sana"
+    ],
+    "quiz": true
+  },
+  "DZ": {
+    "note": "Algeria | Algiers",
+    "quiz": true
+  },
+  "US": {
+    "note": "United States | Washington",
+    "altNames": [
+      "United States Of America"
+    ],
+    "quiz": true
+  },
+  "UY": {
+    "note": "Uruguay | Montevideo",
+    "quiz": true
+  },
+  "YT": {
+    "note": "Mayotte | Mamoudzou",
+    "quiz": false
+  },
+  "UM": {
+    "note": "United States Minor Outlying Islands | ",
+    "quiz": false
+  },
+  "LB": {
+    "note": "Lebanon | Beirut",
+    "quiz": true
+  },
+  "LC": {
+    "note": "Saint Lucia | Castries",
+    "quiz": true
+  },
+  "LA": {
+    "note": "Laos | Vientiane",
+    "quiz": true
+  },
+  "TV": {
+    "note": "Tuvalu | Funafuti",
+    "quiz": true
+  },
+  "TW": {
+    "note": "Taiwan | Taipei",
+    "quiz": true
+  },
+  "TT": {
+    "note": "Trinidad and Tobago | Port of Spain",
+    "quiz": true
+  },
+  "TR": {
+    "note": "Turkey | Ankara",
+    "quiz": true
+  },
+  "LK": {
+    "note": "Sri Lanka | Colombo",
+    "quiz": true
+  },
+  "LI": {
+    "note": "Liechtenstein | Vaduz",
+    "quiz": true
+  },
+  "LV": {
+    "note": "Latvia | Riga",
+    "quiz": true
+  },
+  "TO": {
+    "note": "Tonga | Nuku'alofa",
+    "quiz": true
+  },
+  "LT": {
+    "note": "Lithuania | Vilnius",
+    "quiz": true
+  },
+  "LU": {
+    "note": "Luxembourg | Luxembourg",
+    "quiz": true
+  },
+  "LR": {
+    "note": "Liberia | Monrovia",
+    "quiz": true
+  },
+  "LS": {
+    "note": "Lesotho | Maseru",
+    "quiz": true
+  },
+  "TH": {
+    "note": "Thailand | Bangkok",
+    "quiz": true
+  },
+  "TF": {
+    "note": "French Southern Territories | Port-aux-Francais",
+    "quiz": false
+  },
+  "TG": {
+    "note": "Togo | Lome",
+    "quiz": true
+  },
+  "TD": {
+    "note": "Chad | N'Djamena",
+    "quiz": true
+  },
+  "TC": {
+    "note": "Turks and Caicos Islands | Cockburn Town",
+    "quiz": false
+  },
+  "LY": {
+    "note": "Libya | Tripolis",
+    "altCapitals": [
+      "Tripoli"
+    ],
+    "quiz": true
+  },
+  "VA": {
+    "note": "Vatican | Vatican City",
+    "quiz": true
+  },
+  "VC": {
+    "note": "Saint Vincent and the Grenadines | Kingstown",
+    "quiz": true
+  },
+  "AE": {
+    "note": "United Arab Emirates | Abu Dhabi",
+    "quiz": true
+  },
+  "AD": {
+    "note": "Andorra | Andorra la Vella",
+    "quiz": true
+  },
+  "AG": {
+    "note": "Antigua and Barbuda | St. John's",
+    "quiz": true
+  },
+  "AF": {
+    "note": "Afghanistan | Kabul",
+    "quiz": true
+  },
+  "AI": {
+    "note": "Anguilla | The Valley",
+    "quiz": false
+  },
+  "VI": {
+    "note": "U.S. Virgin Islands | Charlotte Amalie",
+    "quiz": false
+  },
+  "IS": {
+    "note": "Iceland | Reykjavik",
+    "quiz": true
+  },
+  "IR": {
+    "note": "Iran | Tehran",
+    "quiz": true
+  },
+  "AM": {
+    "note": "Armenia | Yerevan",
+    "quiz": true
+  },
+  "AL": {
+    "note": "Albania | Tirana",
+    "quiz": true
+  },
+  "AO": {
+    "note": "Angola | Luanda",
+    "quiz": true
+  },
+  "AQ": {
+    "note": "Antarctica | ",
+    "quiz": false
+  },
+  "AS": {
+    "note": "American Samoa | Pago Pago",
+    "quiz": false
+  },
+  "AR": {
+    "note": "Argentina | Buenos Aires",
+    "quiz": true
+  },
+  "AU": {
+    "note": "Australia | Canberra",
+    "quiz": true
+  },
+  "AT": {
+    "note": "Austria | Vienna",
+    "quiz": true
+  },
+  "AW": {
+    "note": "Aruba | Oranjestad",
+    "quiz": false
+  },
+  "IN": {
+    "note": "India | New Delhi",
+    "quiz": true
+  },
+  "AX": {
+    "note": "Aland Islands | Mariehamn",
+    "quiz": false
+  },
+  "AZ": {
+    "note": "Azerbaijan | Baku",
+    "quiz": true
+  },
+  "IE": {
+    "note": "Ireland | Dublin",
+    "quiz": true
+  },
+  "ID": {
+    "note": "Indonesia | Jakarta",
+    "quiz": true
+  },
+  "UA": {
+    "note": "Ukraine | Kiev",
+    "quiz": true
+  },
+  "QA": {
+    "note": "Qatar | Doha",
+    "quiz": true
+  },
+  "MZ": {
+    "note": "Mozambique | Maputo",
+    "quiz": true
+  }
+}
