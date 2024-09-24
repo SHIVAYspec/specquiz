@@ -1,3 +1,5 @@
+%%raw("import './body.css'")
+
 @val @scope("visualViewport")
 external addEventListener: (string, unit => unit) => unit = "addEventListener"
 
@@ -46,17 +48,10 @@ module Contents = {
     let width = useWidth()
     <div
       style={{
-        marginLeft: "auto",
-        marginRight: "auto",
         width: width->Int.toString ++ "px",
         height: height->Int.toString ++ "px",
       }}>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          height: "calc(100% - 48px)",
-        }}>
+      <div className="mapandlist">
         <EMap />
         <EList />
       </div>

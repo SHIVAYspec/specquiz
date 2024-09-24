@@ -1,9 +1,22 @@
+@media all and (min-width:1000px) {
+    .eList {
+        height: calc(100% - 8px);
+        width: calc(35% - 8px);
+    }
+}
+
+@media all and (max-width:999px) {
+    .eList {
+        height: calc(50% - 8px);
+        min-height: 100px;
+        width: calc(100% - 8px);
+    }
+}
+
 .eList {
     padding: 3px;
     border: 1px solid black;
     background-color: #D2B4DE;
-    height: calc(100% - 8px);
-    width: 35%;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;

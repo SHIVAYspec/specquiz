@@ -35,7 +35,7 @@ let make = () => {
         </div>
         <div className="timer databox"> {React.string(timer)} </div>
         <div className="retry databox">
-          <a href="/"> {React.string("Retry")} </a>
+          <a href="."> {React.string("Retry")} </a>
         </div>
       </>
     } else {
@@ -43,6 +43,8 @@ let make = () => {
         <input
           className="answerbox"
           value={answer}
+          placeholder="Enter answer here."
+          autoFocus=true
           onInput={event => {
             let out = event->JsxEventU.Form.target
             let out = out["value"]
@@ -52,9 +54,11 @@ let make = () => {
             }
           }}
         />
-        <div className="timer databox"> {React.string(timer)} </div>
+        <div className="timer databox">
+          <p> {React.string(timer)} </p>
+        </div>
         <div className="giveup databox" onClick={_ => state->GameState.giveUp}>
-          {React.string("Giveup")}
+          <p> {React.string("Stop")} </p>
         </div>
       </>
     }}

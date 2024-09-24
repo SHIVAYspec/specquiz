@@ -31,19 +31,25 @@ let make = () => {
     )
   }, [])
   <div className="eList">
-    {answers
-    ->Array.map(v => {
-      switch v {
-      | GameState.AnswerCountry(v) =>
-        <Bullet key={v.iso3 ++ "-name"} className="country-bullet">
-          {v.names->Array.at(0)->Option.getUnsafe}
-        </Bullet>
-      | GameState.AnswerCapital(v) =>
-        <Bullet key={v.iso3 ++ "-capital"} className="capital-bullet">
-          {v.capitals->Array.at(0)->Option.getUnsafe}
-        </Bullet>
+    {if answers->Array.length == 0 {
+      <EmptyMessage> "Enter your answers. The list would appear here." </EmptyMessage>
+    } else {
+      {
+        answers
+        ->Array.map(v => {
+          switch v {
+          | GameState.AnswerCountry(v) =>
+            <Bullet key={v.iso3 ++ "-name"} className="country-bullet">
+              {v.names->Array.at(0)->Option.getUnsafe}
+            </Bullet>
+          | GameState.AnswerCapital(v) =>
+            <Bullet key={v.iso3 ++ "-capital"} className="capital-bullet">
+              {v.capitals->Array.at(0)->Option.getUnsafe}
+            </Bullet>
+          }
+        })
+        ->React.array
       }
-    })
-    ->React.array}
+    }}
   </div>
 }
