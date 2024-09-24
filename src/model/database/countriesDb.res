@@ -9,11 +9,9 @@ type country = {
 
 type countries = array<country>
 
-@module external countriesJsonFile: JSON.t = "./countries.json"
-@module external countriesWithGeoJsonJsonFile: JSON.t = "./countriesWithGeoJson.json"
 external toGeoJsonFeature: RescriptCore.JSON.t => LeafletReact.geoJson = "%identity"
 
-let getCountriesDB = (): countries => {
+let convertCountriesJsonToCountriesType = (countriesJson: JSON.t): countries => {
   let getStrOrElseRaiseError = (
     jsonObj: Core__Dict.t<RescriptCore.JSON.t>,
     key: string,
@@ -46,49 +44,85 @@ let getCountriesDB = (): countries => {
     | None => raise(Invalid_argument("Key : %s not found"))
     }
   }
-  switch countriesWithGeoJsonJsonFile {
-  | Object(countriesJsonFileObj) =>
-    switch countriesJsonFileObj->Core__Dict.get("default") {
-    | Some(countriesJson) =>
-      switch countriesJson {
-      | Array(countriesJsonArray) =>
-        countriesJsonArray->Array.map(countryJson => {
-          switch countryJson {
-          | Object(countryJsonObj) => {
-              iso2: countryJsonObj->getStrOrElseRaiseError("iso2"),
-              iso3: countryJsonObj->getStrOrElseRaiseError("iso3"),
-              continent: countryJsonObj->getStrOrElseRaiseError("continent"),
-              names: countryJsonObj->getArrOfStrOrElseRaiseError("names"),
-              capitals: countryJsonObj->getArrOfStrOrElseRaiseError("capital"),
-              geoJsonFeature: switch countryJsonObj->Core__Dict.get("geoJsonFeature") {
-              | Some(geoJsonFeatureJson) => geoJsonFeatureJson->toGeoJsonFeature
-              | None => raise(Invalid_argument("geoJsonFeature not found in country"))
-              },
-            }
-          | _ => raise(Invalid_argument("CountryJson is not an object"))
-          }
-        })
-      | _ => raise(Invalid_argument("CountriesJson is not an array"))
+  switch countriesJson {
+  | Array(countriesJsonArray) =>
+    countriesJsonArray->Array.map(countryJson => {
+      switch countryJson {
+      | Object(countryJsonObj) => {
+          iso2: countryJsonObj->getStrOrElseRaiseError("iso2"),
+          iso3: countryJsonObj->getStrOrElseRaiseError("iso3"),
+          continent: countryJsonObj->getStrOrElseRaiseError("continent"),
+          names: countryJsonObj->getArrOfStrOrElseRaiseError("names"),
+          capitals: countryJsonObj->getArrOfStrOrElseRaiseError("capital"),
+          geoJsonFeature: switch countryJsonObj->Core__Dict.get("geoJsonFeature") {
+          | Some(geoJsonFeatureJson) => geoJsonFeatureJson->toGeoJsonFeature
+          | None => raise(Invalid_argument("geoJsonFeature not found in country"))
+          },
+        }
+      | _ => raise(Invalid_argument("CountryJson is not an object"))
       }
-    | None => raise(Invalid_argument("Default attribute not found in the file"))
-    }
-  | _ => raise(Invalid_argument("Invalid Json document"))
+    })
+  | _ => raise(Invalid_argument("CountriesJson is not an array"))
   }
 }
 
-let test = () => {
-  getCountriesDB()->Array.forEach(country => {
-    Console.log("==================================================")
-    Console.log(
-      country.iso2 ++
-      "->" ++
-      country.iso3 ++
-      "->" ++
-      country.continent ++
-      "->" ++
-      country.names->Array.at(0)->Option.getExn ++
-      "->" ++
-      country.capitals->Array.at(0)->Option.getExn,
-    )
-  })
+let getCountriesFromFetchPromise = async (): JSON.t => {
+  let data = await Fetch.get("./database/countriesWithGeoJson.json")
+  let data = await data->Fetch.Response.json
+  data
 }
+
+module CountriesDatabaseLoader = {
+  @react.component
+  let make = (~builder: countries => React.element) => {
+    let (database, setDatabase) = React.useState(() => None)
+    React.useEffect0(() => {
+      if database->Option.isNone {
+        let dbp = getCountriesFromFetchPromise()
+        let _ = dbp->Promise.then(async v => {
+          setDatabase(_ => Some(convertCountriesJsonToCountriesType(v)))
+        })
+      }
+      None
+    })
+    switch database {
+    | Some(database) => builder(database)
+    | None => <EmptyMessage> "Loading ..." </EmptyMessage>
+    }
+  }
+}
+
+// @module external countriesJsonFile: JSON.t = "./countries.json"
+// @module external countriesWithGeoJsonJsonFile: JSON.t = "./countriesWithGeoJson.json"
+
+// let getCountriesJson = (): JSON.t => {
+//   switch countriesWithGeoJsonJsonFile {
+//   | Object(countriesJsonFileObj) =>
+//     switch countriesJsonFileObj->Core__Dict.get("default") {
+//     | Some(countriesJson) => countriesJson
+//     | None => raise(Invalid_argument("Default attribute not found in the file"))
+//     }
+//   | _ => raise(Invalid_argument("Invalid Json document"))
+//   }
+// }
+
+// let getCountriesFromFile = (): countries => {
+//   convertCountriesJsonToCountriesType(getCountriesJson())
+// }
+
+// let test = () => {
+//   getCountriesFromFile()->Array.forEach(country => {
+//     Console.log("==================================================")
+//     Console.log(
+//       country.iso2 ++
+//       "->" ++
+//       country.iso3 ++
+//       "->" ++
+//       country.continent ++
+//       "->" ++
+//       country.names->Array.at(0)->Option.getExn ++
+//       "->" ++
+//       country.capitals->Array.at(0)->Option.getExn,
+//     )
+//   })
+// }

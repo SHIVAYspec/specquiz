@@ -12,6 +12,7 @@
     "res:build": "rescript"
   },
   "dependencies": {
+    "@glennsl/rescript-fetch": "^0.2.2",
     "@nobleai/rescript-rxjs": "^7.5.18",
     "@rescript/core": "^1.5.2",
     "@rescript/react": "^0.13.0",

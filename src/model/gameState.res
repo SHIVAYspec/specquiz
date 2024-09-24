@@ -17,8 +17,8 @@ type gameState = {
   timerTickerID: Js.Global.intervalId,
 }
 
-let newGameState = (): (gameState, unit => unit) => {
-  let countriesList = CountriesDb.getCountriesDB()
+let newGameState = (countriesList: CountriesDb.countries): (gameState, unit => unit) => {
+  // let countriesList = CountriesDb.getCountriesFromFile()
   let length: int = countriesList->Array.length
   let progressStatusStream: Rxjs.t<
     Rxjs.subject<Rxjs.replay>,
@@ -170,17 +170,23 @@ module Context = {
   module Provider = {
     let make = React.Context.provider(stateContext)
   }
+  module Loader = {
+    @react.component
+    let make = (~db: CountriesDb.countries, ~children: React.element) => {
+      let (state, setState) = React.useState(() => None)
+      React.useEffect0(() => {
+        let (statelocal, dispose) = newGameState(db)
+        setState(_ => Some(statelocal))
+        Some(() => dispose())
+      })
+      switch state {
+      | Some(state) => <Provider value={Some(state)}> {children} </Provider>
+      | None => <EmptyMessage> "Loading Game State ..." </EmptyMessage>
+      }
+    }
+  }
   @react.component
   let make = (~children: React.element) => {
-    let (state, setState) = React.useState(() => None)
-    React.useEffect(() => {
-      let (statelocal, dispose) = newGameState()
-      setState(_ => Some(statelocal))
-      Some(() => dispose())
-    }, [])
-    switch state {
-    | Some(state) => <Provider value={Some(state)}> {children} </Provider>
-    | None => <> </>
-    }
+    <CountriesDb.CountriesDatabaseLoader builder={db => <Loader db> children </Loader>} />
   }
 }

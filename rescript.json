@@ -17,7 +17,8 @@
     "@rescript/core",
     "@rescript/react",
     "@nobleai/rescript-rxjs",
-    "rescript-leaflet-react"
+    "rescript-leaflet-react",
+    "@glennsl/rescript-fetch"
   ],
   "bsc-flags": [
     "-open RescriptCore"
