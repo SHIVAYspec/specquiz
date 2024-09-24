@@ -17,8 +17,9 @@ type gameState = {
   timerTickerID: Js.Global.intervalId,
 }
 
-let newGameState = (countriesList: CountriesDb.countries): (gameState, unit => unit) => {
+let newGameState = (countriesDB: CountriesDb.countriesDB): (gameState, unit => unit) => {
   // let countriesList = CountriesDb.getCountriesFromFile()
+  let countriesList: CountriesDb.countries = countriesDB.countries
   let length: int = countriesList->Array.length
   let progressStatusStream: Rxjs.t<
     Rxjs.subject<Rxjs.replay>,
@@ -172,7 +173,7 @@ module Context = {
   }
   module Loader = {
     @react.component
-    let make = (~db: CountriesDb.countries, ~children: React.element) => {
+    let make = (~db: CountriesDb.countriesDB, ~children: React.element) => {
       let (state, setState) = React.useState(() => None)
       React.useEffect0(() => {
         let (statelocal, dispose) = newGameState(db)

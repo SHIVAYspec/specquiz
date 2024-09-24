@@ -2,8 +2,9 @@
 import json
 import os
 import countriesGeoJson
-import lukes
+# import lukes
 import countryIo
+import continents
 
 def main():
     countriesDB = list()
@@ -23,9 +24,13 @@ def main():
                 countriesDB.append(v)
         else:
             print(f"WARNING : {k} / {v['names']} not found in config")
+    continentsData = continents.getContinents()
     # print(json.dumps(countriesDB))
     with open("countries.json","w") as f:
-        json.dump(countriesDB,f)
+        json.dump({
+            "countries" : countriesDB,
+            "continents" : continentsData
+        },f)
     geoJsonFeatureMap = countriesGeoJson.getCompressedGeoJsonFeatureMap()
     for i in countriesDB:
         if "ISO_A2:" + i['iso2'] in geoJsonFeatureMap:
@@ -44,7 +49,10 @@ def main():
             print(f"WARNING : GEOJSON NOT FOUND : {i['names'][0]}")
     # print(json.dumps(countriesDB))
     with open("countriesWithGeoJson.json","w") as f:
-        json.dump(countriesDB,f)
+        json.dump({
+            "countries" : countriesDB,
+            "continents" : continentsData
+        },f)
 
 if __name__ == '__main__':
     main()

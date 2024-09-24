@@ -52,7 +52,7 @@
   },
   "BI": {
     "note": "Burundi | Bujumbura",
-    "altCapital": [
+    "altCapitals": [
       "Gitega"
     ],
     "quiz": true
@@ -274,6 +274,9 @@
   },
   "PS": {
     "note": "Palestinian Territory | East Jerusalem",
+    "altNames" : [
+      "Palestine"
+    ],
     "altCapitals": [
       "Ramallah"
     ],

@@ -1,0 +1,17 @@
+@media all and (min-width:1000px) {
+    .mapandlist {
+        flex-direction: row;
+    }
+}
+
+@media all and (max-width:999px) {
+    .mapandlist {
+        flex-direction: column;
+    }
+}
+
+.mapandlist {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 48px);
+}

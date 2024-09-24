@@ -1,0 +1,7 @@
+.emptymessage {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    text-align: center;
+    align-content: center;
+}
