@@ -62,7 +62,17 @@ module Contents = {
 
 @react.component
 let make = () => {
-  <GameState.Context>
-    <Contents />
-  </GameState.Context>
+  let db = CountriesDb.useCountriesDB()
+  let (config, setConfig) = React.useState(() => None)
+  switch db {
+  | Some(db) =>
+    switch config {
+    | Some(config) =>
+      <GameState.Context db config>
+        <Contents />
+      </GameState.Context>
+    | None => <ConfigMenu db setConfig />
+    }
+  | None => <EmptyMessage> "Loading the quiz" </EmptyMessage>
+  }
 }

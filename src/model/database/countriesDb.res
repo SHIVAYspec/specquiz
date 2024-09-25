@@ -96,63 +96,22 @@ let convertCountriesJsonToCountriesType = (countriesDBJson: JSON.t): countriesDB
   }
 }
 
-let getCountriesFromFetchPromise = async (): JSON.t => {
+let getCountriesDBFromFetchPromise = async (): countriesDB => {
   let data = await Fetch.get("./database/countriesWithGeoJson.json")
   let data = await data->Fetch.Response.json
-  data
+  data->convertCountriesJsonToCountriesType
 }
 
-module CountriesDatabaseLoader = {
-  @react.component
-  let make = (~builder: countriesDB => React.element) => {
-    let (database, setDatabase) = React.useState(() => None)
-    React.useEffect0(() => {
-      if database->Option.isNone {
-        let dbp = getCountriesFromFetchPromise()
-        let _ = dbp->Promise.then(async v => {
-          setDatabase(_ => Some(convertCountriesJsonToCountriesType(v)))
-        })
-      }
-      None
-    })
-    switch database {
-    | Some(database) => builder(database)
-    | None => <EmptyMessage> "Loading ..." </EmptyMessage>
+let useCountriesDB = (): option<countriesDB> => {
+  let (database, setDatabase) = React.useState(() => None)
+  React.useEffect0(() => {
+    if database->Option.isNone {
+      let dbp = getCountriesDBFromFetchPromise()
+      let _ = dbp->Promise.then(async v => {
+        setDatabase(_ => Some(v))
+      })
     }
-  }
+    None
+  })
+  database
 }
-
-// @module external countriesJsonFile: JSON.t = "./countries.json"
-// @module external countriesWithGeoJsonJsonFile: JSON.t = "./countriesWithGeoJson.json"
-
-// let getCountriesJson = (): JSON.t => {
-//   switch countriesWithGeoJsonJsonFile {
-//   | Object(countriesJsonFileObj) =>
-//     switch countriesJsonFileObj->Core__Dict.get("default") {
-//     | Some(countriesJson) => countriesJson
-//     | None => raise(Invalid_argument("Default attribute not found in the file"))
-//     }
-//   | _ => raise(Invalid_argument("Invalid Json document"))
-//   }
-// }
-
-// let getCountriesFromFile = (): countries => {
-//   convertCountriesJsonToCountriesType(getCountriesJson())
-// }
-
-// let test = () => {
-//   getCountriesFromFile()->Array.forEach(country => {
-//     Console.log("==================================================")
-//     Console.log(
-//       country.iso2 ++
-//       "->" ++
-//       country.iso3 ++
-//       "->" ++
-//       country.continent ++
-//       "->" ++
-//       country.names->Array.at(0)->Option.getExn ++
-//       "->" ++
-//       country.capitals->Array.at(0)->Option.getExn,
-//     )
-//   })
-// }

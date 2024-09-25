@@ -17,9 +17,36 @@ type gameState = {
   timerTickerID: Js.Global.intervalId,
 }
 
-let newGameState = (countriesDB: CountriesDb.countriesDB): (gameState, unit => unit) => {
+type gameStateConfig = {
+  countries: bool,
+  capitals: bool,
+  continents: dict<bool>,
+}
+
+let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfig): (
+  gameState,
+  unit => unit,
+) => {
   // let countriesList = CountriesDb.getCountriesFromFile()
-  let countriesList: CountriesDb.countries = countriesDB.countries
+  let countriesList: CountriesDb.countries =
+    countriesDB.countries
+    ->Array.reduce(Core__Dict.make(), (acc, v) => {
+      switch acc->Core__Dict.get(v.continent) {
+      | Some(arr) => arr->Array.push(v)
+      | None => acc->Core__Dict.set(v.continent, [v])
+      }
+      acc
+    })
+    ->Dict.toArray
+    ->Array.filter(v => {
+      let (k, _) = v
+      config.continents->Dict.get(k)->Option.isSome
+    })
+    ->Array.map(v => {
+      let (_, v) = v
+      v
+    })
+    ->Array.flat
   let length: int = countriesList->Array.length
   let progressStatusStream: Rxjs.t<
     Rxjs.subject<Rxjs.replay>,
@@ -171,23 +198,17 @@ module Context = {
   module Provider = {
     let make = React.Context.provider(stateContext)
   }
-  module Loader = {
-    @react.component
-    let make = (~db: CountriesDb.countriesDB, ~children: React.element) => {
-      let (state, setState) = React.useState(() => None)
-      React.useEffect0(() => {
-        let (statelocal, dispose) = newGameState(db)
-        setState(_ => Some(statelocal))
-        Some(() => dispose())
-      })
-      switch state {
-      | Some(state) => <Provider value={Some(state)}> {children} </Provider>
-      | None => <EmptyMessage> "Loading Game State ..." </EmptyMessage>
-      }
-    }
-  }
   @react.component
-  let make = (~children: React.element) => {
-    <CountriesDb.CountriesDatabaseLoader builder={db => <Loader db> children </Loader>} />
+  let make = (~db: CountriesDb.countriesDB, ~config: gameStateConfig, ~children: React.element) => {
+    let (state, setState) = React.useState(() => None)
+    React.useEffect0(() => {
+      let (statelocal, dispose) = newGameState(db, config)
+      setState(_ => Some(statelocal))
+      Some(() => dispose())
+    })
+    switch state {
+    | Some(state) => <Provider value={Some(state)}> {children} </Provider>
+    | None => <EmptyMessage> "Loading Quiz ..." </EmptyMessage>
+    }
   }
 }
