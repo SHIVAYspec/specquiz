@@ -193,14 +193,14 @@ let tryAnswer = (state: gameState, answer: string): bool =>
 let giveUp = (state: gameState): unit => {
   state.timerTickerID->Js.Global.clearInterval
   state.timer->Rxjs.complete
-  state.score.contents = state.length * 2
+  state.score.contents = state.length * (state.config.countries && state.config.capitals ? 2 : 1)
   state.progressStatusMap->Map.forEachWithKey((value, key) => {
     let countryData = state.countriesIso2Map->Map.get(key)->Option.getUnsafe
-    if !value.country {
+    if state.config.countries && !value.country {
       state.score.contents = state.score.contents - 1
       state.progressStatusStream->Rxjs.next(AnswerCountry(countryData))
     }
-    if !value.capital {
+    if state.config.capitals && !value.capital {
       state.score.contents = state.score.contents - 1
       state.progressStatusStream->Rxjs.next(AnswerCapital(countryData))
     }
