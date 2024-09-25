@@ -12,18 +12,6 @@
     gap: 3px;
 }
 
-.configHeading {
-    margin: 8px;
-    background-color: #808B96;
-    box-shadow: 3px 3px;
-    border-radius : 10px;
-}
-
-.configHeadingText {
-    margin: 0;
-    text-align: center;
-}
-
 .configMenuSubSection {
     display: flex;
     flex-wrap: wrap;
@@ -37,11 +25,14 @@
     border: 1px solid black;
     padding: 5px;
     border-radius : 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
 }
 
 .selectedButtonBullet {
-    background-color: #8E44AD;
-    box-shadow: 3px 3px;
+    background-color: #2E86C1;
+    /* box-shadow: 3px 3px; */
 }
 
 .selectedText {
@@ -56,12 +47,9 @@
     color: black;
 }
 
-.submitButtonBullet {
-    box-shadow: 3px 3px;
-}
-
 .submitButtonBulletReady {
-    background-color: #52BE80;
+    background-color: #196F3D;
+    box-shadow: 3px 3px;
 }
 
 .submitButtonBulletInvalid {

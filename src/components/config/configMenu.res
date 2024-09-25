@@ -21,15 +21,13 @@ let make = (
     (countriesOption || capitalsOption) && selectedContinent->Core__Dict.toArray->Array.length != 0
   }, (countriesOption, capitalsOption, selectedContinent->Core__Dict.toArray->Array.length == 0))
   <div className="configMenu">
-    <div className="configHeading">
-      <h1 className="configHeadingText"> {React.string("Countries and capitals quiz")} </h1>
-    </div>
     <div className="configMenuSubSection">
       <div
         className={"buttonBullet " ++ (
           countriesOption ? "selectedButtonBullet" : "unselectedButtonBullet"
         )}
         onClick={_ => setCountriesOption(v => !v)}>
+        <input type_="checkbox" checked=countriesOption />
         <p className={(countriesOption ? "" : "un") ++ "selectedText"}>
           {React.string("Countries")}
         </p>
@@ -39,6 +37,7 @@ let make = (
           capitalsOption ? "selectedButtonBullet" : "unselectedButtonBullet"
         )}
         onClick={_ => setCapitalsOption(v => !v)}>
+        <input type_="checkbox" checked=capitalsOption />
         <p className={(capitalsOption ? "" : "un") ++ "selectedText"}>
           {React.string("Capitals")}
         </p>
@@ -60,6 +59,7 @@ let make = (
                 data->Core__Dict.copy
               })
             }}>
+            <input type_="checkbox" checked=true />
             <p className="selectedText"> {React.string(v)} </p>
           </div>
         | None =>
@@ -72,6 +72,7 @@ let make = (
                 data->Core__Dict.copy
               })
             }}>
+            <input type_="checkbox" checked=false />
             <p className="unselectedText"> {React.string(v)} </p>
           </div>
         }
@@ -80,8 +81,8 @@ let make = (
     </div>
     <div className="configMenuSubSection">
       <div
-        className={"buttonBullet submitButtonBullet " ++ (
-          valid ? "submitButtonBulletReady" : "submitButtonBulletInvaid"
+        className={"buttonBullet " ++ (
+          valid ? "submitButtonBulletReady" : "submitButtonBulletInvalid"
         )}
         onClick={_ => {
           if valid {
@@ -92,7 +93,7 @@ let make = (
             }))
           }
         }}>
-        <p className="selectedText"> {React.string("Start")} </p>
+        <p className="selectedText"> {React.string("Start Quiz")} </p>
       </div>
     </div>
   </div>
