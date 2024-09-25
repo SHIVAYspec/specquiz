@@ -49,6 +49,10 @@
     background-color: #BFC9CA;
 }
 
+.gaveup-bullet {
+    background-color: red;
+}
+
 p {
     margin: 0;
 }

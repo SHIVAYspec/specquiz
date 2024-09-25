@@ -3,7 +3,10 @@ type progressStatus = {
   capital: bool,
 }
 
-type answerType = AnswerCountry(CountriesDb.country) | AnswerCapital(CountriesDb.country)
+type answerType =
+  | AnswerCountry(CountriesDb.country)
+  | AnswerCapital(CountriesDb.country)
+  | GiveUp
 
 type gameStateConfig = {
   countries: bool,
@@ -49,11 +52,12 @@ let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfi
     })
     ->Array.flat
   let length: int = countriesList->Array.length
+  let numberOfQuestions = length * (config.capitals && config.countries ? 2 : 1)
   let progressStatusStream: Rxjs.t<
     Rxjs.subject<Rxjs.replay>,
     Rxjs.source<answerType>,
     answerType,
-  > = Rxjs.Subject.makeReplay(length * 2)
+  > = Rxjs.Subject.makeReplay(numberOfQuestions + 1)
   let score = ref(-1)
   let timer: Rxjs.t<Rxjs.subject<Rxjs.behavior>, Rxjs.source<int>, int> = Rxjs.Subject.makeBehavior(
     0,
@@ -64,7 +68,6 @@ let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfi
     timer->Rxjs.next(counter.contents)
   }, 1000)
   let progressCounter = ref(0)
-  let numberOfQuestions = length * (config.capitals && config.countries ? 2 : 1)
   let progressStatusStreamSub = progressStatusStream->Rxjs.subscribe({
     next: _ => {
       progressCounter.contents = progressCounter.contents + 1
@@ -191,6 +194,7 @@ let tryAnswer = (state: gameState, answer: string): bool =>
   state->tryAnswerForCapital(answer) || state->tryAnswerForCountry(answer)
 
 let giveUp = (state: gameState): unit => {
+  state.progressStatusStream->Rxjs.next(GiveUp)
   state.timerTickerID->Js.Global.clearInterval
   state.timer->Rxjs.complete
   state.score.contents = state.length * (state.config.countries && state.config.capitals ? 2 : 1)

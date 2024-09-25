@@ -46,6 +46,8 @@ let make = () => {
             <Bullet key={v.iso3 ++ "-capital"} className="capital-bullet">
               {v.capitals->Array.at(0)->Option.getUnsafe}
             </Bullet>
+          | GameState.GiveUp =>
+            <Bullet key={"gaveup"} className="gaveup-bullet"> {"Gave up"} </Bullet>
           }
         })
         ->React.array
