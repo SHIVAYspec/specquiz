@@ -30,7 +30,7 @@ let make = () => {
             "Score : " ++
             state.score.contents->Int.toString ++
             " out of " ++
-            (state.length * 2)->Int.toString,
+            state->GameState.getMaxScorePossible->Int.toString,
           )}
         </div>
         <div className="timer databox"> {React.string(timer)} </div>

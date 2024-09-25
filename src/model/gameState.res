@@ -5,6 +5,12 @@ type progressStatus = {
 
 type answerType = AnswerCountry(CountriesDb.country) | AnswerCapital(CountriesDb.country)
 
+type gameStateConfig = {
+  countries: bool,
+  capitals: bool,
+  continents: dict<bool>,
+}
+
 type gameState = {
   length: int,
   countriesIso2Map: Map.t<string, CountriesDb.country>,
@@ -15,12 +21,7 @@ type gameState = {
   score: ref<int>,
   timer: Rxjs.t<Rxjs.subject<Rxjs.behavior>, Rxjs.source<int>, int>,
   timerTickerID: Js.Global.intervalId,
-}
-
-type gameStateConfig = {
-  countries: bool,
-  capitals: bool,
-  continents: dict<bool>,
+  config: gameStateConfig,
 }
 
 let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfig): (
@@ -63,14 +64,15 @@ let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfi
     timer->Rxjs.next(counter.contents)
   }, 1000)
   let progressCounter = ref(0)
+  let numberOfQuestions = length * (config.capitals && config.countries ? 2 : 1)
   let progressStatusStreamSub = progressStatusStream->Rxjs.subscribe({
     next: _ => {
       progressCounter.contents = progressCounter.contents + 1
-      if progressCounter.contents == length * 2 {
+      if progressCounter.contents == numberOfQuestions {
         timerTickerID->Js.Global.clearInterval
         timer->Rxjs.complete
         if score.contents == -1 {
-          score.contents = length * 2
+          score.contents = numberOfQuestions
         }
         let _ = setTimeout(() => {
           progressStatusStream->Rxjs.complete
@@ -106,6 +108,7 @@ let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfi
       score,
       timer,
       timerTickerID,
+      config,
     },
     () => {
       progressStatusStreamSub->Rxjs.unsubscribe
@@ -136,39 +139,51 @@ let getTimer = (state: gameState) => {
   )
 }
 
+let getMaxScorePossible = (state: gameState): int => {
+  state.length * (state.config.capitals && state.config.countries ? 2 : 1)
+}
+
 let tryAnswerForCountry = (state: gameState, answer: string): bool => {
-  switch state.countriesNameToIso2Map->Map.get(answer->String.toLowerCase) {
-  | Some(iso2Code) => {
-      let status = state.progressStatusMap->Map.get(iso2Code)->Option.getUnsafe
-      if status.country {
-        false
-      } else {
-        state.progressStatusMap->Map.set(iso2Code, {country: true, capital: status.capital})
-        state.progressStatusStream->Rxjs.next(
-          AnswerCountry(state.countriesIso2Map->Map.get(iso2Code)->Option.getUnsafe),
-        )
-        true
+  if state.config.countries {
+    switch state.countriesNameToIso2Map->Map.get(answer->String.toLowerCase) {
+    | Some(iso2Code) => {
+        let status = state.progressStatusMap->Map.get(iso2Code)->Option.getUnsafe
+        if status.country {
+          false
+        } else {
+          state.progressStatusMap->Map.set(iso2Code, {country: true, capital: status.capital})
+          state.progressStatusStream->Rxjs.next(
+            AnswerCountry(state.countriesIso2Map->Map.get(iso2Code)->Option.getUnsafe),
+          )
+          true
+        }
       }
+    | None => false
     }
-  | None => false
+  } else {
+    false
   }
 }
 
 let tryAnswerForCapital = (state: gameState, answer: string): bool => {
-  switch state.countriesCapitalToIso2Map->Map.get(answer->String.toLowerCase) {
-  | Some(iso2Code) => {
-      let status = state.progressStatusMap->Map.get(iso2Code)->Option.getUnsafe
-      if status.capital {
-        false
-      } else {
-        state.progressStatusMap->Map.set(iso2Code, {capital: true, country: status.country})
-        state.progressStatusStream->Rxjs.next(
-          AnswerCapital(state.countriesIso2Map->Map.get(iso2Code)->Option.getUnsafe),
-        )
-        true
+  if state.config.capitals {
+    switch state.countriesCapitalToIso2Map->Map.get(answer->String.toLowerCase) {
+    | Some(iso2Code) => {
+        let status = state.progressStatusMap->Map.get(iso2Code)->Option.getUnsafe
+        if status.capital {
+          false
+        } else {
+          state.progressStatusMap->Map.set(iso2Code, {capital: true, country: status.country})
+          state.progressStatusStream->Rxjs.next(
+            AnswerCapital(state.countriesIso2Map->Map.get(iso2Code)->Option.getUnsafe),
+          )
+          true
+        }
       }
+    | None => false
     }
-  | None => false
+  } else {
+    false
   }
 }
 
