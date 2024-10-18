@@ -1,58 +1,63 @@
-@media all and (min-width:1000px) {
-    .eList {
-        height: calc(100% - 8px);
-        width: calc(35% - 8px);
-    }
+@media all and (min-width: 1000px) {
+  .eList {
+    height: calc(100% - 8px);
+    width: calc(35% - 8px);
+  }
 }
 
-@media all and (max-width:999px) {
-    .eList {
-        height: calc(50% - 8px);
-        min-height: 100px;
-        width: calc(100% - 8px);
-    }
+@media all and (max-width: 999px) {
+  .eList {
+    height: calc(50% - 8px);
+    min-height: 100px;
+    width: calc(100% - 8px);
+  }
 }
 
 .eList {
-    padding: 3px;
-    border: 1px solid black;
-    background-color: #D2B4DE;
-    overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-content: baseline;
-    justify-content: center;
+  padding: 3px;
+  border: 1px solid black;
+  background-color: #d2b4de;
+  overflow: auto;
 }
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.selectors {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: auto;
 }
 
-.bullet {
-    margin: 3px;
-    border: 1px solid black;
-    box-shadow: 3px 3px;
-    border-radius : 3px;
-    border-shadow : 3px;
-    padding: 5px;
-    display: inline-flex;
-    animation: fadein 2s;
+.selectors > :first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-.country-bullet {
-    background-color: #F8C471;
+.selectors > :last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
-.capital-bullet {
-    background-color: #BFC9CA;
+.selector {
+  padding: 8px;
+  border: 1px solid black;
+  font-size: large;
+  font-weight: bold;
+  text-wrap: nowrap;
 }
 
-.gaveup-bullet {
-    background-color: red;
+.selector-selected {
+  background-color: #7fb3d5;
 }
 
-p {
-    margin: 0;
+.selector-unselected {
+  background-color: #d6dbdf;
+}
+
+.line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
 }

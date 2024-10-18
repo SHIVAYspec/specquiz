@@ -1,57 +1,53 @@
 %%raw("import './eList.css'")
 
-module Bullet = {
+type viewMode = None | UnGrouped | GroupedByContinent
+
+module ViewModeSelectors = {
+  module S = {
+    @react.component
+    let make = (
+      ~label: string,
+      ~value: viewMode,
+      ~config: viewMode,
+      ~setConfig: (viewMode => viewMode) => unit,
+    ) => {
+      let color = "selector-" ++ (value == config ? "" : "un") ++ "selected"
+      <button onClick={_ => setConfig(_ => value)} className={"selector " ++ color}>
+        {React.string(label)}
+      </button>
+    }
+  }
   @react.component
-  let make = (~className: string, ~children: string) => {
-    <div className={"bullet " ++ className}>
-      <p> {React.string(children)} </p>
+  let make = (~config: viewMode, ~setConfig: (viewMode => viewMode) => unit) => {
+    <div className="selectors">
+      <S label="Off" value=None config setConfig />
+      <S label="Ungrouped" value=UnGrouped config setConfig />
+      <S label="Grouped" value=GroupedByContinent config setConfig />
     </div>
+  }
+}
+
+module Line = {
+  @react.component
+  let make = () => {
+    <div className="line" />
   }
 }
 
 @react.component
 let make = () => {
-  let state: GameState.gameState =
-    React.useContext(GameState.Context.stateContext)->Option.getUnsafe
-  let (answers: array<GameState.answerType>, setAnswers) = React.useState(() => [])
-  React.useEffect(() => {
-    let answerSub = state.progressStatusStream->Rxjs.subscribe({
-      next: e => {
-        setAnswers(countries => {
-          [e, ...countries]
-        })
-      },
-      complete: () => (),
-      error: _ => (),
-    })
-    Some(
-      () => {
-        answerSub->Rxjs.unsubscribe
-      },
-    )
-  }, [])
+  let (config, setConfig) = React.useState(() => GroupedByContinent)
   <div className="eList">
-    {if answers->Array.length == 0 {
-      <EmptyMessage> "Enter your answers. The list would appear here." </EmptyMessage>
-    } else {
-      {
-        answers
-        ->Array.map(v => {
-          switch v {
-          | GameState.AnswerCountry(v) =>
-            <Bullet key={v.iso3 ++ "-name"} className="country-bullet">
-              {v.names->Array.at(0)->Option.getUnsafe}
-            </Bullet>
-          | GameState.AnswerCapital(v) =>
-            <Bullet key={v.iso3 ++ "-capital"} className="capital-bullet">
-              {v.capitals->Array.at(0)->Option.getUnsafe}
-            </Bullet>
-          | GameState.GiveUp =>
-            <Bullet key={"gaveup"} className="gaveup-bullet"> {"Gave up"} </Bullet>
-          }
-        })
-        ->React.array
-      }
+    <EListTotal />
+    <Line />
+    {switch config {
+    | None =>
+      <EListBullet.Bullet className="heading-bullet"> {"List display is off"} </EListBullet.Bullet>
+    | UnGrouped => <EListContentsGrouped key={"grouped"} />
+    | GroupedByContinent => <EListContentsUnGrouped key={"ungrouped"} />
     }}
+    <Line />
+    <ViewModeSelectors config setConfig />
+    <Line />
   </div>
 }

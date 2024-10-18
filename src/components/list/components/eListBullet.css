@@ -1,0 +1,44 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bullet {
+  margin: 3px;
+  border: 1px solid black;
+  box-shadow: 3px 3px;
+  border-radius: 3px;
+  border-shadow: 3px;
+  padding: 5px;
+  display: inline-flex;
+  animation: fadein 2s;
+}
+
+.country-bullet {
+  background-color: #f8c471;
+}
+
+.capital-bullet {
+  background-color: #bfc9ca;
+}
+
+.gaveup-bullet {
+  background-color: red;
+}
+
+.heading-bullet {
+  background-color: #e5e8e8;
+  /* font-weight: bold;
+  font-size: large; */
+}
+
+.bullet-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

@@ -16,6 +16,7 @@ type gameStateConfig = {
 
 type gameState = {
   length: int,
+  continentsCode2Map: CountriesDb.continents,
   countriesIso2Map: Map.t<string, CountriesDb.country>,
   countriesNameToIso2Map: Map.t<string, string>,
   countriesCapitalToIso2Map: Map.t<string, string>,
@@ -89,6 +90,7 @@ let newGameState = (countriesDB: CountriesDb.countriesDB, config: gameStateConfi
   (
     {
       length,
+      continentsCode2Map: countriesDB.continents,
       countriesIso2Map: Map.fromArray(countriesList->Array.map(country => (country.iso2, country))),
       countriesNameToIso2Map: Map.fromArray(
         countriesList
