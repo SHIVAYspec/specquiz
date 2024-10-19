@@ -41,10 +41,9 @@ let make = () => {
     <EListTotal />
     <Line />
     {switch config {
-    | None =>
-      <EListBullet.Bullet className="heading-bullet"> {"List display is off"} </EListBullet.Bullet>
-    | UnGrouped => <EListContentsGrouped key={"grouped"} />
-    | GroupedByContinent => <EListContentsUnGrouped key={"ungrouped"} />
+    | None => <h2> {React.string("List is off")} </h2>
+    | UnGrouped => <EListContentsUnGrouped key={"ungrouped"} />
+    | GroupedByContinent => <EListContentsGrouped key={"grouped"} />
     }}
     <Line />
     <ViewModeSelectors config setConfig />

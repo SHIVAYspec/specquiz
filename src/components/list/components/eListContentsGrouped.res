@@ -1,6 +1,3 @@
-// let insertIntoMap = (map:map<string,GameState.answerType>,element:GameState.answerType) {
-
-// }
 @react.component
 let make = () => {
   let state: GameState.gameState =
@@ -47,6 +44,7 @@ let make = () => {
           },
           state.continentsCode2Map
           ->Dict.keysToArray
+          ->Array.filter(v => state.config.continents->Dict.get(v)->Option.isSome)
           ->Array.map(v => (v, []))
           ->Map.fromArray,
         ),
@@ -106,10 +104,11 @@ let make = () => {
               v->Array.map(v => <EListBullet.AnswerBullet> {v} </EListBullet.AnswerBullet>),
             )}
           </EListBullet.List>
+          <hr />
         </>
       })
       ->React.array
-    | None => <EListBullet.Bullet className="heading-bullet"> "Loading..." </EListBullet.Bullet>
+    | None => <h2> {React.string("Enter your answers. The list would appear here.")} </h2>
     }
   }
 }

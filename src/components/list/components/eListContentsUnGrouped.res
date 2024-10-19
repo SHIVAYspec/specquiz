@@ -23,7 +23,7 @@ let make = () => {
 
   {
     if answers->Array.length == 0 {
-      <EmptyMessage> "Enter your answers. The list would appear here." </EmptyMessage>
+      <h2> {React.string("Enter your answers. The list would appear here.")} </h2>
     } else {
       {
         <EListBullet.AnswerList> answers </EListBullet.AnswerList>
