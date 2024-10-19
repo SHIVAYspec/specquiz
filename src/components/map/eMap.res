@@ -1,56 +1,13 @@
 %%raw("import './eMap.css'")
 %%raw("import 'leaflet/dist/leaflet.css'")
 
-let _makeGeoJson = (answers: array<GameState.answerType>, giveUp: bool) => {
-  let countryColor = giveUp ? "red" : "#85C1E9"
-  let capitalColor = giveUp ? "red" : "black"
-  answers
-  ->Array.map(v => {
-    switch v {
-    | GameState.AnswerCountry(v) =>
-      <LeafletReact.GeoJSON
-        key={v.iso3 ++ "-names"}
-        data={v.geoJsonFeature}
-        eventHandlers={Some(
-          EventHandlers.make(
-            ~click=_ => Console.log("Clicked : " ++ v.names->Array.at(0)->Option.getUnsafe),
-            (),
-          ),
-        )}
-        style={Some(
-          PathOptions.make(
-            ~color="black",
-            ~fillColor=countryColor,
-            ~fillOpacity=0.20,
-            ~weight=1,
-            (),
-          ),
-        )}>
-        {Some(
-          <LeafletReact.Tooltip>
-            <p> {React.string(v.names->Array.at(0)->Option.getUnsafe)} </p>
-          </LeafletReact.Tooltip>,
-        )}
-      </LeafletReact.GeoJSON>
-    | GameState.AnswerCapital(v) =>
-      <LeafletReact.GeoJSON
-        key={v.iso3 ++ "-capital"}
-        data={v.geoJsonFeature}
-        style={Some(PathOptions.make(~color=capitalColor, ~fill=giveUp, ~weight=1, ()))}
-      />
-    | GameState.GiveUp => raise(Invalid_argument("Invalid element for map"))
-    }
-  })
-  ->React.array
-}
-
 @react.component
 let make = () => {
   let state: GameState.gameState =
     React.useContext(GameState.Context.stateContext)->Option.getUnsafe
-  let (answers, setAnswers) = React.useState(() => None)
+  let ((gaveup, answers), setAnswers) = React.useState(() => (false, None))
   React.useEffect(() => {
-    setAnswers(_ => None)
+    setAnswers(_ => (false, None))
     let answerSub =
       state.progressStatusStream
       ->Rxjs.pipe2(
@@ -81,15 +38,19 @@ let make = () => {
           }
         }, (false, Map.make())),
         Rxjs.map((v, _) => {
-          let (_, answers) = v
-          answers
-          ->Map.values
-          ->Core__Iterator.toArray
+          let (gaveup, answers) = v
+          (
+            gaveup,
+            answers
+            ->Map.values
+            ->Core__Iterator.toArray,
+          )
         }),
       )
       ->Rxjs.subscribe({
         next: v => {
-          setAnswers(_ => Some(v))
+          let (gaveup, answers) = v
+          setAnswers(_ => (gaveup, Some(answers)))
         },
         complete: () => (),
         error: _ => (),
@@ -114,23 +75,16 @@ let make = () => {
         {e
         ->Array.map(v => {
           let (data, countryAns, capitalAns) = v
+          let answered = countryAns || capitalAns
           <LeafletReact.GeoJSON
             key={data.iso3}
             data={data.geoJsonFeature}
-            eventHandlers={Some(
-              EventHandlers.make(
-                ~click=_ => Console.log("Clicked : " ++ data.names->Array.at(0)->Option.getUnsafe),
-                (),
-              ),
-            )}
             style={Some(
               PathOptions.make(
                 ~color="black",
-                ~fillColor={countryAns || capitalAns ? "#A569BD" : "#FF0000"},
+                ~fillColor={answered ? "#A569BD" : "#FF0000"},
                 ~fillOpacity={
-                  countryAns || capitalAns
-                    ? (countryAns ? 0.20 : 0.0) +. (capitalAns ? 0.20 : 0.0)
-                    : 0.20
+                  answered ? (countryAns ? 0.20 : 0.0) +. (capitalAns ? 0.20 : 0.0) : 0.25
                 },
                 ~weight=1,
                 (),
@@ -140,8 +94,10 @@ let make = () => {
               <LeafletReact.Tooltip>
                 <p>
                   {React.string(
-                    (countryAns ? data.names->Array.at(0)->Option.getUnsafe : "?") ++
-                    " : " ++ (capitalAns ? data.capitals->Array.at(0)->Option.getUnsafe : "?"),
+                    (countryAns || gaveup ? data.names->Array.at(0)->Option.getUnsafe : "?") ++
+                    " : " ++ (
+                      capitalAns || gaveup ? data.capitals->Array.at(0)->Option.getUnsafe : "?"
+                    ),
                   )}
                 </p>
               </LeafletReact.Tooltip>,
