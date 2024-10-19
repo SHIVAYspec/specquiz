@@ -2,7 +2,7 @@
 %%raw("import 'leaflet/dist/leaflet.css'")
 
 let _makeGeoJson = (answers: array<GameState.answerType>, giveUp: bool) => {
-  let countryColor = giveUp ? "red" : "blue"
+  let countryColor = giveUp ? "red" : "#85C1E9"
   let capitalColor = giveUp ? "red" : "black"
   answers
   ->Array.map(v => {
@@ -11,8 +11,27 @@ let _makeGeoJson = (answers: array<GameState.answerType>, giveUp: bool) => {
       <LeafletReact.GeoJSON
         key={v.iso3 ++ "-names"}
         data={v.geoJsonFeature}
-        style={Some(PathOptions.make(~color=countryColor, ~weight=1, ()))}
-      />
+        eventHandlers={Some(
+          EventHandlers.make(
+            ~click=_ => Console.log("Clicked : " ++ v.names->Array.at(0)->Option.getUnsafe),
+            (),
+          ),
+        )}
+        style={Some(
+          PathOptions.make(
+            ~color="black",
+            ~fillColor=countryColor,
+            ~fillOpacity=0.20,
+            ~weight=1,
+            (),
+          ),
+        )}>
+        {Some(
+          <LeafletReact.Tooltip>
+            <p> {React.string(v.names->Array.at(0)->Option.getUnsafe)} </p>
+          </LeafletReact.Tooltip>,
+        )}
+      </LeafletReact.GeoJSON>
     | GameState.AnswerCapital(v) =>
       <LeafletReact.GeoJSON
         key={v.iso3 ++ "-capital"}
@@ -29,34 +48,48 @@ let _makeGeoJson = (answers: array<GameState.answerType>, giveUp: bool) => {
 let make = () => {
   let state: GameState.gameState =
     React.useContext(GameState.Context.stateContext)->Option.getUnsafe
-  let (
-    (answers, answersKey): (array<GameState.answerType>, array<GameState.answerType>),
-    setAnswers,
-  ) = React.useState(() => ([], []))
+  let (answers, setAnswers) = React.useState(() => None)
   React.useEffect(() => {
+    setAnswers(_ => None)
     let answerSub =
       state.progressStatusStream
       ->Rxjs.pipe2(
-        Rxjs.scan((a, v, _) => {
-          let (giveUp, answers, answersKey) = a
+        Rxjs.scan((agg, v, _) => {
+          let (gaveup, answers) = agg
           switch v {
-          | GameState.GiveUp => (true, answers, answersKey)
-          | _ =>
-            if giveUp {
-              (true, answers, [v, ...answersKey])
-            } else {
-              (false, [v, ...answers], answersKey)
+          | GameState.GiveUp => (true, answers)
+          | GameState.AnswerCountry(e) => {
+              switch answers->Map.get(e.iso3) {
+              | Some(x) => {
+                  let (_, _, capital) = x
+                  answers->Map.set(e.iso3, (e, !gaveup, capital))
+                }
+              | None => answers->Map.set(e.iso3, (e, !gaveup, false))
+              }
+              (gaveup, answers)
+            }
+          | GameState.AnswerCapital(e) => {
+              switch answers->Map.get(e.iso3) {
+              | Some(x) => {
+                  let (_, country, _) = x
+                  answers->Map.set(e.iso3, (e, country, !gaveup))
+                }
+              | None => answers->Map.set(e.iso3, (e, false, !gaveup))
+              }
+              (gaveup, answers)
             }
           }
-        }, (false, [], [])),
+        }, (false, Map.make())),
         Rxjs.map((v, _) => {
-          let (_, a, b) = v
-          (a, b)
+          let (_, answers) = v
+          answers
+          ->Map.values
+          ->Core__Iterator.toArray
         }),
       )
       ->Rxjs.subscribe({
         next: v => {
-          setAnswers(_ => v)
+          setAnswers(_ => Some(v))
         },
         complete: () => (),
         error: _ => (),
@@ -68,9 +101,9 @@ let make = () => {
     )
   }, [])
   <div className="eMap">
-    {if answers->Array.length + answersKey->Array.length == 0 {
-      <EmptyMessage> "Enter your answers. The map would appear here." </EmptyMessage>
-    } else {
+    {switch answers {
+    | None => <EmptyMessage> "Enter your answers. The map would appear here." </EmptyMessage>
+    | Some(e) =>
       <LeafletReact.MapContainer center=(0.0, 0.0) zoom={2.0}>
         // <LeafletReact.TileLayer
         //   attribution={Some(
@@ -78,8 +111,44 @@ let make = () => {
         //   )}
         //   url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
         // />
-        {_makeGeoJson(answers, false)}
-        {_makeGeoJson(answersKey, true)}
+        {e
+        ->Array.map(v => {
+          let (data, countryAns, capitalAns) = v
+          <LeafletReact.GeoJSON
+            key={data.iso3}
+            data={data.geoJsonFeature}
+            eventHandlers={Some(
+              EventHandlers.make(
+                ~click=_ => Console.log("Clicked : " ++ data.names->Array.at(0)->Option.getUnsafe),
+                (),
+              ),
+            )}
+            style={Some(
+              PathOptions.make(
+                ~color="black",
+                ~fillColor={countryAns || capitalAns ? "#A569BD" : "#FF0000"},
+                ~fillOpacity={
+                  countryAns || capitalAns
+                    ? (countryAns ? 0.20 : 0.0) +. (capitalAns ? 0.20 : 0.0)
+                    : 0.20
+                },
+                ~weight=1,
+                (),
+              ),
+            )}>
+            {Some(
+              <LeafletReact.Tooltip>
+                <p>
+                  {React.string(
+                    (countryAns ? data.names->Array.at(0)->Option.getUnsafe : "?") ++
+                    " : " ++ (capitalAns ? data.capitals->Array.at(0)->Option.getUnsafe : "?"),
+                  )}
+                </p>
+              </LeafletReact.Tooltip>,
+            )}
+          </LeafletReact.GeoJSON>
+        })
+        ->React.array}
       </LeafletReact.MapContainer>
     }}
   </div>
